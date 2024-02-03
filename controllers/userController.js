@@ -63,7 +63,11 @@ module.exports = {
         return res.status(404).json({ message: 'Cannot delete user because no user profile matches that ID' });
       }
 
-      res.json(user);
+      await Thought.deleteMany({ username: user.username });
+
+      const userName = user.username;
+
+      res.json({ message: `${userName} and associated thoughts deleted` });
     }
     catch (err) {
       res.status(500).json(err);
