@@ -1,4 +1,7 @@
 const { Schema, model, default: mongoose } = require('mongoose');
+const moment = require('moment');
+
+
 
 const thoughtsSchema = new Schema(
   {
@@ -15,14 +18,34 @@ const thoughtsSchema = new Schema(
       // Add adjustable timme stammp based on how lng ago post was made (one second ago, ${minutes} ago, ${hours} ago, etc)
       get: thoughtTimestampFormat => moment(thoughtTimestampFormat).format("MMM DD, YYYY [at] hh:mm a")
     },
+  },
+);
 
-    reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Reaction'
-      }
-    ]
-  
+const reactionSchema = new Schema(
+  {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId()
+    },
+
+    reactionBody: {
+      type: String,
+      required: 'Reaction is required',
+      minlength: 1,
+      maxlength: 280,
+    },
+
+    username: {
+      type: String,
+      required: 'Username is required',
+    },
+
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      // Add adjustable time stamp based on how long ago a reaction was posted (${seconds} ago, ${minutes} ago, ${hours} ago, etc)
+      get: thoughtTimestampFormat => moment(thoughtTimestampFormat).format("MMM DD, YYYY [at] hh:mm a"),
+    }
   },
 
   {
@@ -33,6 +56,10 @@ const thoughtsSchema = new Schema(
     id: false
   }
 );
+
+thoughtsSchema.virtual('reactionTally').get(function () {
+  return this.reactions.length;
+});
 
 const Thoughts = mongoose.model('Thoughts', thoughtsSchema);
 
