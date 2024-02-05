@@ -17,7 +17,7 @@ module.exports = {
     try {
       const thought = await Thought.findOne({ _id: req.params.thoughtId })
         .select('-__v');
-        
+
       if (!thought) {
         return res.status(404).json({ message: 'No thought with that ID' });
       }
@@ -39,7 +39,7 @@ module.exports = {
           { new: true }
         );
       res.json(thought);
-    } catch (err) { 
+    } catch (err) {
       res.status(500).json(err);
     }
   },
@@ -63,56 +63,56 @@ module.exports = {
     }
   },
 
-// Delete route to remove a thought and remove it from the user
-deleteThought: async (req, res) => {
-  try {
-    const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
-    const user = await User.findOneAndUpdate(
-      { thoughts: req.params.thoughtId },
-      { $pull: { thoughts: req.params.thoughtId } },
-      { new: true }
-    );
-    if (!thought) {
-      return res.status(404).json({ message: 'No thought with that ID' });
+  // Delete route to remove a thought and remove it from the user
+  deleteThought: async (req, res) => {
+    try {
+      const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
+      const user = await User.findOneAndUpdate(
+        { thoughts: req.params.thoughtId },
+        { $pull: { thoughts: req.params.thoughtId } },
+        { new: true }
+      );
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with that ID' });
+      }
+      res.json(thought);
     }
-    res.json(thought);
-  }
-  catch (err) {
-    res.status(500).json(err);
-  }
-},
+    catch (err) {
+      res.status(500).json(err);
+    }
+  },
 
-// Post route to add a reaction to a thought
-addReaction: async (req, res) => {
-  try {
-    const thought = await Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
-      { $addToSet: { reactions: req.body } },
-      { new: true }
-    );
-    if (!thought) {
-      return res.status(404).json({ message: 'No thought with that ID' });
+  // Post route to add a reaction to a thought
+  addReaction: async (req, res) => {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $addToSet: { reactions: req.body } },
+        { new: true }
+      );
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with that ID' });
+      }
+      res.json(thought);
+    } catch (err) {
+      res.status(500).json(err);
     }
-    res.json(thought);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-},
+  },
 
-// Delete route to remove a reaction from a thought
-deleteReaction: async (req, res) => {
-  try {
-    const thought = await Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
-      { $pull: { reactions: { reactionId: req.params.reactionId } } },
-      { new: true }
-    );
-    if (!thought) {
-      return res.status(404).json({ message: 'No thought with that ID' });
+  // Delete route to remove a reaction from a thought
+  deleteReaction: async (req, res) => {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { new: true }
+      );
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with that ID' });
+      }
+      res.json(thought);
+    } catch (err) {
+      res.status(500).json(err);
     }
-    res.json(thought);
-  } catch (err) {
-    res.status(500).json(err);
   }
-}
 };
