@@ -1,6 +1,6 @@
-const { Thought, User } = require('../models');
+const { Thoughts, User } = require('../models');
 
-const thoughtController = {
+module.exports = {
 
   // Get route for all thoughts
   getThoughts: async (req, res) => {
@@ -17,9 +17,11 @@ const thoughtController = {
     try {
       const thought = await Thought.findOne({ _id: req.params.thoughtId })
         .select('-__v');
+        
       if (!thought) {
         return res.status(404).json({ message: 'No thought with that ID' });
       }
+
       res.json(thought);
     } catch (err) {
       res.status(500).json(err);
@@ -59,8 +61,7 @@ const thoughtController = {
     } catch (err) {
       res.status(500).json(err);
     }
-  }
-};
+  },
 
 // Delete route to remove a thought and remove it from the user
 deleteThought: async (req, res) => {
@@ -79,7 +80,7 @@ deleteThought: async (req, res) => {
   catch (err) {
     res.status(500).json(err);
   }
-}
+},
 
 // Post route to add a reaction to a thought
 addReaction: async (req, res) => {
@@ -96,7 +97,7 @@ addReaction: async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-}
+},
 
 // Delete route to remove a reaction from a thought
 deleteReaction: async (req, res) => {
@@ -114,5 +115,4 @@ deleteReaction: async (req, res) => {
     res.status(500).json(err);
   }
 }
-
-module.exports = thoughtController;
+};

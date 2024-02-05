@@ -15,7 +15,7 @@ const thoughtsSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // Add adjustable timme stammp based on how lng ago post was made (one second ago, ${minutes} ago, ${hours} ago, etc)
+      // Add adjustable timestamp based on how long ago post was made (one second ago, ${minutes} ago, ${hours} ago, etc)
       get: thoughtTimestampFormat => moment(thoughtTimestampFormat).format("MMM DD, YYYY [at] hh:mm a")
     },
   },
@@ -43,7 +43,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // Add adjustable time stamp based on how long ago a reaction was posted (${seconds} ago, ${minutes} ago, ${hours} ago, etc)
+      // Add adjustable timestamp based on how long ago a reaction was posted (${seconds} ago, ${minutes} ago, ${hours} ago, etc)
       get: thoughtTimestampFormat => moment(thoughtTimestampFormat).format("MMM DD, YYYY [at] hh:mm a"),
     }
   },

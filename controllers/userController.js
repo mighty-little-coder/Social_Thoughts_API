@@ -1,8 +1,9 @@
-const router = require('express').Router();
-const { Thought, User } = require('../../models');
+const { Thoughts, User } = require('../../models');
 
 module.exports = {
-  async getAllUsers(req, res) {
+
+  // Get route for all users
+  getUsers: async (req, res) => {
     try {
       const users = await User.find();
       res.json(users);
@@ -10,12 +11,14 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  async getUserById(req, res) {
+
+  // Get route for a single user
+  getUser: async (req, res) => {
     try {
       const user = await User.findOne({ _id: req.params.userId })
-      .populate('friends')
-      .populate('thoughts')
-      .select('-__v');
+        .populate('friends')
+        .populate('thoughts')
+        .select('-__v');
 
       if (!user) {
         return res.status(404).json({ message: 'No user profile matches that ID' });
@@ -27,7 +30,8 @@ module.exports = {
     }
   },
 
-  async createUser(req, res) {
+  // Post route to create a new user
+  createUser: async (req, res) => {
     try {
       const user = await User.create(req.body);
       res.json(user);
@@ -36,7 +40,8 @@ module.exports = {
     }
   },
 
-  async updateUserById(req, res) {
+  // Put route to update a user
+  updateUser: async (req, res) => {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
@@ -55,7 +60,8 @@ module.exports = {
     }
   },
 
-  async deleteUserById(req, res) {
+  // Delete route to remove a user
+  deleteUser: async (req, res) => {
     try {
       const user = await User.findOneAndDelete({ _id: req.params.userId });
 
@@ -74,7 +80,8 @@ module.exports = {
     }
   },
 
-  async addFriend(req, res) {
+  // Post route to add a friend to a user
+  addFriend: async (req, res) => {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
@@ -93,7 +100,8 @@ module.exports = {
     }
   },
 
-  async removeFriend(req, res) {
+  // Delete route to remove a friend from a user
+  removeFriend: async (req, res) => {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
