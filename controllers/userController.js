@@ -69,7 +69,7 @@ module.exports = {
         return res.status(404).json({ message: 'Cannot delete user because no user profile matches that ID' });
       }
 
-      await Thought.deleteMany({ username: user.username });
+      await Thoughts.deleteMany({ username: user.username });
 
       const userName = user.username;
 
@@ -80,7 +80,7 @@ module.exports = {
     }
   },
 
-  // Post route to add a friend to a user
+  // Put route to add a friend to a user
   addFriend: async (req, res) => {
     try {
       const user = await User.findOneAndUpdate(

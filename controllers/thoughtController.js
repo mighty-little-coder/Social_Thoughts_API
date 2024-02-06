@@ -38,7 +38,7 @@ module.exports = {
           { $addToSet: { thoughts: thought._id } },
           { new: true }
         );
-      res.json({ message: 'This thought was added to ${user}', thought });
+      res.json({ message: `This thought was added to ${user.username}'s profile`, thought });
     } catch (err) {
       res.status(500).json(err);
     }
@@ -102,7 +102,7 @@ module.exports = {
   // Delete route to remove a reaction from a thought
   deleteReaction: async (req, res) => {
     try {
-      const thought = await Thoughts.findOneAndUpdate(
+      const thought = await Thoughts.findOneAndDelete(
         { _id: req.params.thoughtId },
         { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { new: true }
