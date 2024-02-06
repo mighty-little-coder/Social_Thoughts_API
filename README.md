@@ -49,7 +49,7 @@
   - <a href="https://leewarrick.com/">Lee Warrick</a> UCONN Bootcamp Instructor
   - <a href="https://github.com/miacias">Mia Ciasullo</a> UCONN Bootcamp Instructor
   - <a href="https://github.com/samanthashleyrose">Samantha Rose</a> UCONN Bootcamp Student
-  - <a href="https://github.com/siennameow">Sienna Li</a>
+  - <a href="https://github.com/siennameow">Sienna Li</a> for code assistance
   - <a href="https://youtu.be/Ull3rMOP3s8?si=_EN9gIqz5sWd64pR">Steph F</a> for a demonstration of walk-through video
   
   ## Technologies Used
@@ -98,6 +98,7 @@ For this project, all tests will be run in an API development environment such a
 - DELETE reactions
 - DELETE friends
   
+These test routes can be found listed below their identifying comments within the controller files. The routes can be tested by running the server and using an API development environment like Insomnia Core to send requests to the server.
   
   ## License
   

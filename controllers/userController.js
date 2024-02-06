@@ -3,6 +3,7 @@ const { Thoughts, User } = require('./../models');
 module.exports = {
 
   // Get route for all users
+  // http://localhost:3001/api/users
   getUsers: async (req, res) => {
     try {
       const users = await User.find();
@@ -13,6 +14,7 @@ module.exports = {
   },
 
   // Get route for a single user
+  // http://localhost:3001/api/users/:userId
   getUser: async (req, res) => {
     try {
       const user = await User.findOne({ _id: req.params.userId })
@@ -31,6 +33,7 @@ module.exports = {
   },
 
   // Post route to create a new user
+  // http://localhost:3001/api/users
   createUser: async (req, res) => {
     try {
       const user = await User.create(req.body);
@@ -41,6 +44,7 @@ module.exports = {
   },
 
   // Put route to update a user
+  // http://localhost:3001/api/users/:userId
   updateUser: async (req, res) => {
     try {
       const user = await User.findOneAndUpdate(
@@ -61,6 +65,7 @@ module.exports = {
   },
 
   // Delete route to remove a user
+  // http://localhost:3001/api/users/:userId
   deleteUser: async (req, res) => {
     try {
       const user = await User.findOneAndDelete({ _id: req.params.userId });
@@ -81,6 +86,7 @@ module.exports = {
   },
 
   // Put route to add a friend to a user
+  // http://localhost:3001/api/users/:userId/friends/:friendId
   addFriend: async (req, res) => {
     try {
       const user = await User.findOneAndUpdate(
@@ -101,6 +107,7 @@ module.exports = {
   },
 
   // Delete route to remove a friend from a user
+  // http://localhost:3001/api/users/:userId/friends/:friendId
   removeFriend: async (req, res) => {
     try {
       const user = await User.findOneAndUpdate(
