@@ -38,7 +38,7 @@
   ![Get all users screenshot on Insomnia](images/get_all_users.png)
   ![Post new friend screenshot on Insomnia](images/post_new_friend.png)
   ![Post new reactions screenshot on Insomnia](images/post_new_reaction.png)
-  ![Post new thoughts screenshot on Insomnia](images/post_new_thought)
+  ![Post new thoughts screenshot on Insomnia](images/post_new_thought.png)
 
 
   ## Credits
