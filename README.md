@@ -4,7 +4,7 @@
   
   ## Description
   
-  The Social Thoughts API is a RESTful API that allows users to create, read, update, and delete thoughts and reactions to those thoughts. Users can also add and remove friends from their friend list. The API is built using Express.js, Mongoose, and MongoDB. This application allows for friends to be connected both to their thoughts and to other users, as well as tally reactions to individual thoughts.
+  The Social Thoughts API is a RESTful API that allows users to create, read, update, and delete thoughts and reactions to those thoughts. Users can also add and remove friends from their friend list. The API is built using Express.js, Mongoose, and MongoDB. This application allows for friends to be connected both to their thoughts and to other users, as well as tally reactions to individual thoughts. In the future, I'd like to add the well-known feature of updated post timestamps that vary based on the amount of time elapsed since the post was created.
   
   
   ## Table of Contents
